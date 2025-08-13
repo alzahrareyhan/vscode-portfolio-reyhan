@@ -56,7 +56,7 @@ export const projects: Project[] = [
     title: 'Mango Leaf Disease Detection',
     description:
       'Mango leaf disease detection using feature fusion of ResNet50V2 and EfficientNetV2, achieving 99.75% accuracy.',
-    logo: '/logos/py.png',
+    logo: '/logos/Py.png',
     link: 'https://www.kaggle.com/code/reyhannandita/mango-feature-fusion-resnet50v2-and-efficientnetv2',
     slug: 'Mango Leaf Disease Detection',
   },
