@@ -1,4 +1,5 @@
 import MusicCard from '@/components/MusicCard';
+/* eslint-disable @next/next/no-img-element */
 
 type Music = {
   id: string;
@@ -9,6 +10,24 @@ type Music = {
   preview_url: string | null;
   spotify_url: string;
 };
+
+interface SpotifyArtist {
+  name: string;
+}
+
+interface SpotifyAlbum {
+  name: string;
+  images?: { url: string }[];
+}
+
+interface SpotifyTrack {
+  id: string;
+  name: string;
+  artists?: SpotifyArtist[];
+  album?: SpotifyAlbum;
+  preview_url?: string | null;
+  external_urls?: { spotify?: string };
+}
 
 interface MusicPageProps {
   musics: Music[];
@@ -32,9 +51,8 @@ const MusicPage = ({ musics, artistName }: MusicPageProps) => {
         .
       </p>
       <div className="container">
-        {Array.isArray(musics) && musics.map((m) => (
-          <MusicCard key={m.id} music={m} />
-        ))}
+        {Array.isArray(musics) &&
+          musics.map((m) => <MusicCard key={m.id} music={m} />)}
       </div>
       <style jsx>{`
         .layout { max-width: 1080px; margin: 0 auto; padding: 2rem 1rem; }
@@ -48,8 +66,8 @@ const MusicPage = ({ musics, artistName }: MusicPageProps) => {
 };
 
 export async function getStaticProps() {
-  const ARTIST_ID = '4Se8s9q1npJNlYflRqV15V'; // dari link kamu
-  // 1) Dapatkan access token
+  const ARTIST_ID = '4Se8s9q1npJNlYflRqV15V';
+  
   const tokenRes = await fetch('https://accounts.spotify.com/api/token', {
     method: 'POST',
     headers: {
@@ -66,18 +84,17 @@ export async function getStaticProps() {
   const tokenData = await tokenRes.json();
   const accessToken = tokenData.access_token;
 
-  // 2) Ambil Top Tracks artis (pilih market sesuai kebutuhan)
   const res = await fetch(
     `https://api.spotify.com/v1/artists/${ARTIST_ID}/top-tracks?market=ID`,
     { headers: { Authorization: `Bearer ${accessToken}` } }
   );
 
-  const data = await res.json();
+  const data: { tracks?: SpotifyTrack[] } = await res.json();
 
-  const musics: Music[] = (data.tracks || []).slice(0, 12).map((t: any) => ({
+  const musics: Music[] = (data.tracks || []).slice(0, 12).map((t) => ({
     id: t.id,
     title: t.name,
-    artist: t.artists?.map((a: any) => a.name).join(', ') ?? '',
+    artist: t.artists?.map((a) => a.name).join(', ') ?? '',
     album: t.album?.name ?? '',
     cover: t.album?.images?.[0]?.url ?? null,
     preview_url: t.preview_url ?? null,
@@ -90,7 +107,7 @@ export async function getStaticProps() {
       musics,
       artistName: data.tracks?.[0]?.artists?.[0]?.name ?? 'Artist',
     },
-    revalidate: 300, // 5 menit
+    revalidate: 300,
   };
 }
 

@@ -10,14 +10,14 @@ const AboutPage = () => {
         <div className={styles.aboutContent}>
           <section className={styles.section}>
             <p className={styles.paragraph}>
-              Hey! I'm a fresh graduate from Indramayu, West Java. 
-              I'm passionate about Data Science, 
-              AI Engineering, and ML Engineering, and I’m eager to 
-              apply my knowledge and skills in these fields
+              Hey! I&apos;m a fresh graduate from Indramayu, West Java. 
+              I&apos;m passionate about Data Science, 
+              AI Engineering, and ML Engineering, and I&rsquo;m eager to 
+              apply my knowledge and skills in these fields.
             </p>
 
             <p className={styles.paragraph}>
-              I’m focused on extracting actionable insights from complex datasets, 
+              I&rsquo;m focused on extracting actionable insights from complex datasets, 
               developing AI-driven applications, and building robust machine learning models.
               With expertise in Python, R, and machine learning frameworks like TensorFlow and 
               Scikit-Learn.
