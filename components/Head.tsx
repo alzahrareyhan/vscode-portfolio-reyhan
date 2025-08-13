@@ -23,8 +23,8 @@ const CustomHead = ({ title }: CustomHeadProps) => {
         content="A data scientist, AI engineer, and ML engineer building intelligent systems and solutions you'll enjoy using."
       />
 
-      <meta property="og:image" content="https://imgur.com/4zi5KkQ.png" />
-      <meta property="og:url" content="https://vscode-portfolio.vercel.app" />
+      <meta property="og:image" content="https://imgur.com/a/L3pFK77" />
+      <meta property="og:url" content="https://reyhannandita.vercel.app" />
       <meta name="twitter:card" content="summary_large_image" />
     </Head>
   );
